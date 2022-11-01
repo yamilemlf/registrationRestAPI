@@ -32,14 +32,39 @@ export class CustomerService {
     getCustomerById(id:number){
         const ourCustomer = customers.find(customer => customer.id === id)
         if(!ourCustomer){
-            throw new NotFoundException('customer does not exist')
+            throw new NotFoundException('O cliente buscado não existe')
         }
         return ourCustomer 
     }
 
     createNewCustomer(customer:any){
+        if(!customer){
+            throw new NotFoundException('As informações do cliente não foram definidas.')
+        }
         customers.push(customer)
         return customers
+    }
+
+    updateACustomer(id:number, customer:any){
+        let customerToUpdate = customers.find(customer => customer.id === id)
+        if(!customerToUpdate){
+            throw new NotFoundException('O cliente a ser atualizado não existe')
+        }
+        if(!customer){
+            throw new NotFoundException('As informações do cliente não foram definidas.')
+        }
+        for(let i = 0; i < customers.length; i++){
+            if(customers[i].id === id){
+                customers[i].name = customer.name
+                customers[i].email = customer.email
+                customers[i].cellNumber = customer.cellNumber
+                return customers
+            }
+        }
+    }
+
+    deleteACustomer(id:number){
+
     }
 
 }

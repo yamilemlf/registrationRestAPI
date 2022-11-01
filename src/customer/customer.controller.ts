@@ -20,4 +20,14 @@ export class CustomerController {
         return this.customerService.getCustomerById(Number(id))
     }
 
+    @Put(':id')
+    update(@Param('id') id:number, @Body() customer:any){
+        return this.customerService.updateACustomer(Number(id), customer)
+    }
+
+    @Delete(':id')
+    delete(@Param('id') id:number){
+        return this.customerService.deleteACustomer(Number(id))
+    }
+
 }
